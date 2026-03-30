@@ -1,0 +1,85 @@
+{
+  "exams": {
+    "JEE Main": {
+      "totalMarks": 300,
+      "historicalMarksToRank": {
+        "2024": [
+          { "marksMin": 280, "marksMax": 300, "rankMin": 1, "rankMax": 100 },
+          { "marksMin": 250, "marksMax": 279, "rankMin": 101, "rankMax": 1000 },
+          { "marksMin": 220, "marksMax": 249, "rankMin": 1001, "rankMax": 5000 },
+          { "marksMin": 200, "marksMax": 219, "rankMin": 5001, "rankMax": 10000 },
+          { "marksMin": 180, "marksMax": 199, "rankMin": 10001, "rankMax": 20000 },
+          { "marksMin": 160, "marksMax": 179, "rankMin": 20001, "rankMax": 35000 },
+          { "marksMin": 140, "marksMax": 159, "rankMin": 35001, "rankMax": 55000 },
+          { "marksMin": 120, "marksMax": 139, "rankMin": 55001, "rankMax": 80000 },
+          { "marksMin": 100, "marksMax": 119, "rankMin": 80001, "rankMax": 120000 },
+          { "marksMin": 80, "marksMax": 99, "rankMin": 120001, "rankMax": 180000 },
+          { "marksMin": 60, "marksMax": 79, "rankMin": 180001, "rankMax": 300000 },
+          { "marksMin": 40, "marksMax": 59, "rankMin": 300001, "rankMax": 500000 },
+          { "marksMin": 0, "marksMax": 39, "rankMin": 500001, "rankMax": 1000000 }
+        ],
+        "2023": [
+          { "marksMin": 280, "marksMax": 300, "rankMin": 1, "rankMax": 90 },
+          { "marksMin": 250, "marksMax": 279, "rankMin": 91, "rankMax": 900 },
+          { "marksMin": 220, "marksMax": 249, "rankMin": 901, "rankMax": 4800 },
+          { "marksMin": 200, "marksMax": 219, "rankMin": 4801, "rankMax": 9500 },
+          { "marksMin": 180, "marksMax": 199, "rankMin": 9501, "rankMax": 19000 },
+          { "marksMin": 160, "marksMax": 179, "rankMin": 19001, "rankMax": 33000 },
+          { "marksMin": 140, "marksMax": 159, "rankMin": 33001, "rankMax": 52000 },
+          { "marksMin": 120, "marksMax": 139, "rankMin": 52001, "rankMax": 76000 },
+          { "marksMin": 100, "marksMax": 119, "rankMin": 76001, "rankMax": 115000 },
+          { "marksMin": 80, "marksMax": 99, "rankMin": 115001, "rankMax": 170000 },
+          { "marksMin": 60, "marksMax": 79, "rankMin": 170001, "rankMax": 280000 },
+          { "marksMin": 40, "marksMax": 59, "rankMin": 280001, "rankMax": 480000 },
+          { "marksMin": 0, "marksMax": 39, "rankMin": 480001, "rankMax": 950000 }
+        ],
+        "2022": [
+          { "marksMin": 280, "marksMax": 300, "rankMin": 1, "rankMax": 110 },
+          { "marksMin": 250, "marksMax": 279, "rankMin": 111, "rankMax": 1100 },
+          { "marksMin": 220, "marksMax": 249, "rankMin": 1101, "rankMax": 5200 },
+          { "marksMin": 200, "marksMax": 219, "rankMin": 5201, "rankMax": 10500 },
+          { "marksMin": 180, "marksMax": 199, "rankMin": 10501, "rankMax": 21000 },
+          { "marksMin": 160, "marksMax": 179, "rankMin": 21001, "rankMax": 36000 },
+          { "marksMin": 140, "marksMax": 159, "rankMin": 36001, "rankMax": 57000 },
+          { "marksMin": 120, "marksMax": 139, "rankMin": 57001, "rankMax": 83000 },
+          { "marksMin": 100, "marksMax": 119, "rankMin": 83001, "rankMax": 125000 },
+          { "marksMin": 80, "marksMax": 99, "rankMin": 125001, "rankMax": 185000 },
+          { "marksMin": 60, "marksMax": 79, "rankMin": 185001, "rankMax": 310000 },
+          { "marksMin": 40, "marksMax": 59, "rankMin": 310001, "rankMax": 520000 },
+          { "marksMin": 0, "marksMax": 39, "rankMin": 520001, "rankMax": 1050000 }
+        ]
+      },
+      "colleges": []
+    },
+    "JEE Advanced": {
+      "totalMarks": 360,
+      "historicalMarksToRank": {
+        "2024": [
+          { "marksMin": 310, "marksMax": 360, "rankMin": 1, "rankMax": 50 },
+          { "marksMin": 280, "marksMax": 309, "rankMin": 51, "rankMax": 300 },
+          { "marksMin": 250, "marksMax": 279, "rankMin": 301, "rankMax": 800 },
+          { "marksMin": 220, "marksMax": 249, "rankMin": 801, "rankMax": 2000 },
+          { "marksMin": 190, "marksMax": 219, "rankMin": 2001, "rankMax": 4500 },
+          { "marksMin": 160, "marksMax": 189, "rankMin": 4501, "rankMax": 8000 },
+          { "marksMin": 130, "marksMax": 159, "rankMin": 8001, "rankMax": 13000 },
+          { "marksMin": 100, "marksMax": 129, "rankMin": 13001, "rankMax": 20000 },
+          { "marksMin": 70, "marksMax": 99, "rankMin": 20001, "rankMax": 30000 },
+          { "marksMin": 0, "marksMax": 69, "rankMin": 30001, "rankMax": 50000 }
+        ],
+        "2023": [
+          { "marksMin": 310, "marksMax": 360, "rankMin": 1, "rankMax": 45 },
+          { "marksMin": 280, "marksMax": 309, "rankMin": 46, "rankMax": 280 },
+          { "marksMin": 250, "marksMax": 279, "rankMin": 281, "rankMax": 750 },
+          { "marksMin": 220, "marksMax": 249, "rankMin": 751, "rankMax": 1900 },
+          { "marksMin": 190, "marksMax": 219, "rankMin": 1901, "rankMax": 4200 },
+          { "marksMin": 160, "marksMax": 189, "rankMin": 4201, "rankMax": 7500 },
+          { "marksMin": 130, "marksMax": 159, "rankMin": 7501, "rankMax": 12500 },
+          { "marksMin": 100, "marksMax": 129, "rankMin": 12501, "rankMax": 19000 },
+          { "marksMin": 70, "marksMax": 99, "rankMin": 19001, "rankMax": 28000 },
+          { "marksMin": 0, "marksMax": 69, "rankMin": 28001, "rankMax": 48000 }
+        ]
+      },
+      "colleges": []
+    }
+  }
+}
