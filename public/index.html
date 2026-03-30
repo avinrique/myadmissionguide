@@ -1,0 +1,865 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>MyAdmissionGuide - Dashboard</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      background: #f0f2f5;
+      color: #1a1a2e;
+      line-height: 1.6;
+    }
+
+    /* Login Page */
+    .login-container {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: linear-gradient(135deg, #0f0c29 0%, #302b63 50%, #24243e 100%);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .login-container::before {
+      content: '';
+      position: absolute;
+      width: 600px;
+      height: 600px;
+      background: radial-gradient(circle, rgba(99, 102, 241, 0.15) 0%, transparent 70%);
+      top: -200px;
+      right: -200px;
+      border-radius: 50%;
+    }
+
+    .login-container::after {
+      content: '';
+      position: absolute;
+      width: 400px;
+      height: 400px;
+      background: radial-gradient(circle, rgba(16, 185, 129, 0.1) 0%, transparent 70%);
+      bottom: -100px;
+      left: -100px;
+      border-radius: 50%;
+    }
+
+    .login-card {
+      background: rgba(255, 255, 255, 0.95);
+      backdrop-filter: blur(20px);
+      padding: 48px 40px;
+      border-radius: 20px;
+      box-shadow: 0 25px 60px rgba(0, 0, 0, 0.3);
+      width: 100%;
+      max-width: 420px;
+      position: relative;
+      z-index: 1;
+      border: 1px solid rgba(255, 255, 255, 0.2);
+    }
+
+    .login-logo {
+      text-align: center;
+      margin-bottom: 36px;
+    }
+
+    .login-logo .logo-icon {
+      width: 56px;
+      height: 56px;
+      background: linear-gradient(135deg, #6366f1, #8b5cf6);
+      border-radius: 14px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 16px;
+      font-size: 24px;
+      color: white;
+      font-weight: 700;
+      box-shadow: 0 8px 24px rgba(99, 102, 241, 0.3);
+    }
+
+    .login-logo h1 {
+      font-size: 22px;
+      font-weight: 700;
+      color: #1a1a2e;
+      letter-spacing: -0.3px;
+    }
+
+    .login-logo p {
+      color: #6b7280;
+      font-size: 14px;
+      margin-top: 4px;
+    }
+
+    .login-field {
+      margin-bottom: 20px;
+    }
+
+    .login-field label {
+      display: block;
+      font-size: 13px;
+      font-weight: 600;
+      margin-bottom: 6px;
+      color: #374151;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    .login-field input {
+      width: 100%;
+      padding: 13px 16px;
+      border: 2px solid #e5e7eb;
+      border-radius: 10px;
+      font-size: 15px;
+      font-family: inherit;
+      transition: all 0.2s ease;
+      background: #f9fafb;
+    }
+
+    .login-field input:focus {
+      outline: none;
+      border-color: #6366f1;
+      background: white;
+      box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.1);
+    }
+
+    .login-btn {
+      width: 100%;
+      padding: 14px;
+      background: linear-gradient(135deg, #6366f1, #8b5cf6);
+      color: white;
+      border: none;
+      border-radius: 10px;
+      font-size: 15px;
+      font-weight: 600;
+      font-family: inherit;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      margin-top: 8px;
+      box-shadow: 0 4px 14px rgba(99, 102, 241, 0.3);
+    }
+
+    .login-btn:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 6px 20px rgba(99, 102, 241, 0.4);
+    }
+
+    .login-btn:active {
+      transform: translateY(0);
+    }
+
+    .login-error {
+      background: #fef2f2;
+      color: #dc2626;
+      padding: 12px 16px;
+      border-radius: 10px;
+      margin-bottom: 20px;
+      font-size: 13px;
+      font-weight: 500;
+      display: none;
+      border: 1px solid #fecaca;
+    }
+
+    /* Dashboard */
+    .dashboard {
+      display: none;
+    }
+
+    .header {
+      background: linear-gradient(135deg, #1a1a2e 0%, #302b63 100%);
+      color: white;
+      padding: 0 32px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      height: 72px;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+
+    .header-brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .header-brand .brand-icon {
+      width: 36px;
+      height: 36px;
+      background: linear-gradient(135deg, #6366f1, #8b5cf6);
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 16px;
+      font-weight: 700;
+      color: white;
+    }
+
+    .header h1 {
+      font-size: 18px;
+      font-weight: 600;
+      letter-spacing: -0.3px;
+    }
+
+    .header-right {
+      display: flex;
+      align-items: center;
+      gap: 20px;
+    }
+
+    .user-info {
+      font-size: 13px;
+      opacity: 0.7;
+    }
+
+    .user-info strong {
+      opacity: 1;
+      color: #a5b4fc;
+    }
+
+    .logout-btn {
+      background: rgba(255, 255, 255, 0.1);
+      color: white;
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      padding: 8px 16px;
+      border-radius: 8px;
+      cursor: pointer;
+      font-size: 13px;
+      font-family: inherit;
+      font-weight: 500;
+      transition: all 0.2s;
+    }
+
+    .logout-btn:hover {
+      background: rgba(255, 255, 255, 0.18);
+    }
+
+    /* Stats Bar */
+    .stats-bar {
+      background: white;
+      padding: 20px 32px;
+      display: flex;
+      gap: 24px;
+      border-bottom: 1px solid #e5e7eb;
+      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04);
+    }
+
+    .stat-card {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      padding: 12px 20px;
+      background: #f8fafc;
+      border-radius: 12px;
+      border: 1px solid #e5e7eb;
+      min-width: 160px;
+    }
+
+    .stat-icon {
+      width: 42px;
+      height: 42px;
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 18px;
+    }
+
+    .stat-icon.total {
+      background: linear-gradient(135deg, #ede9fe, #ddd6fe);
+      color: #6366f1;
+    }
+
+    .stat-icon.today {
+      background: linear-gradient(135deg, #d1fae5, #a7f3d0);
+      color: #059669;
+    }
+
+    .stat-content .stat-value {
+      font-weight: 700;
+      font-size: 22px;
+      color: #1a1a2e;
+      line-height: 1.2;
+    }
+
+    .stat-content .stat-label {
+      font-size: 12px;
+      color: #6b7280;
+      font-weight: 500;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    .container {
+      max-width: 1440px;
+      margin: 0 auto;
+      padding: 28px 32px;
+    }
+
+    .controls {
+      display: flex;
+      gap: 12px;
+      margin-bottom: 20px;
+      flex-wrap: wrap;
+    }
+
+    .search-box {
+      flex: 1;
+      min-width: 280px;
+      padding: 11px 16px;
+      padding-left: 42px;
+      border: 2px solid #e5e7eb;
+      border-radius: 10px;
+      font-size: 14px;
+      font-family: inherit;
+      transition: all 0.2s;
+      background: white url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%239ca3af' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Ccircle cx='11' cy='11' r='8'%3E%3C/circle%3E%3Cline x1='21' y1='21' x2='16.65' y2='16.65'%3E%3C/line%3E%3C/svg%3E") no-repeat 14px center;
+    }
+
+    .search-box:focus {
+      outline: none;
+      border-color: #6366f1;
+      box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.1);
+    }
+
+    .btn {
+      padding: 11px 20px;
+      border: none;
+      border-radius: 10px;
+      cursor: pointer;
+      font-size: 13px;
+      font-weight: 600;
+      font-family: inherit;
+      transition: all 0.2s;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .btn-primary {
+      background: linear-gradient(135deg, #6366f1, #8b5cf6);
+      color: white;
+      box-shadow: 0 2px 8px rgba(99, 102, 241, 0.25);
+    }
+
+    .btn-primary:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 4px 12px rgba(99, 102, 241, 0.35);
+    }
+
+    .btn-secondary {
+      background: white;
+      color: #374151;
+      border: 2px solid #e5e7eb;
+    }
+
+    .btn-secondary:hover {
+      background: #f9fafb;
+      border-color: #d1d5db;
+    }
+
+    .table-container {
+      background: white;
+      border-radius: 14px;
+      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.06), 0 4px 16px rgba(0, 0, 0, 0.04);
+      overflow: hidden;
+      border: 1px solid #e5e7eb;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+    }
+
+    th {
+      background: #f8fafc;
+      padding: 13px 16px;
+      text-align: left;
+      font-weight: 600;
+      font-size: 11px;
+      color: #6b7280;
+      text-transform: uppercase;
+      letter-spacing: 0.8px;
+      border-bottom: 2px solid #e5e7eb;
+      white-space: nowrap;
+    }
+
+    td {
+      padding: 14px 16px;
+      border-bottom: 1px solid #f3f4f6;
+      font-size: 14px;
+      color: #374151;
+    }
+
+    tr:last-child td {
+      border-bottom: none;
+    }
+
+    tbody tr {
+      transition: background 0.15s;
+    }
+
+    tbody tr:hover {
+      background: #fafaff;
+    }
+
+    .badge {
+      display: inline-block;
+      padding: 4px 10px;
+      border-radius: 6px;
+      font-size: 12px;
+      font-weight: 600;
+    }
+
+    .badge-marks {
+      background: #ede9fe;
+      color: #6366f1;
+    }
+
+    .badge-rank {
+      background: #d1fae5;
+      color: #059669;
+    }
+
+    .rank-range {
+      font-size: 13px;
+      color: #6b7280;
+      font-weight: 500;
+    }
+
+    .empty-state {
+      text-align: center;
+      padding: 80px 20px;
+      color: #94a3b8;
+    }
+
+    .empty-state .empty-icon {
+      font-size: 48px;
+      margin-bottom: 16px;
+      opacity: 0.5;
+    }
+
+    .empty-state h2 {
+      font-size: 18px;
+      margin-bottom: 8px;
+      color: #4b5563;
+      font-weight: 600;
+    }
+
+    .empty-state p {
+      font-size: 14px;
+    }
+
+    .loading {
+      text-align: center;
+      padding: 60px;
+      color: #6b7280;
+    }
+
+    .spinner {
+      width: 40px;
+      height: 40px;
+      border: 3px solid #e5e7eb;
+      border-top-color: #6366f1;
+      border-radius: 50%;
+      animation: spin 0.8s linear infinite;
+      margin: 0 auto 16px;
+    }
+
+    @keyframes spin {
+      to { transform: rotate(360deg); }
+    }
+
+    /* Fade-in animation */
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .dashboard {
+      animation: fadeIn 0.3s ease;
+    }
+
+    .login-card {
+      animation: fadeIn 0.4s ease;
+    }
+
+    @media (max-width: 768px) {
+      .header {
+        padding: 0 16px;
+        height: auto;
+        padding: 16px;
+        flex-direction: column;
+        gap: 12px;
+      }
+
+      .header-right {
+        width: 100%;
+        justify-content: space-between;
+      }
+
+      .stats-bar {
+        padding: 16px;
+        gap: 12px;
+        flex-wrap: wrap;
+      }
+
+      .stat-card {
+        min-width: 140px;
+        flex: 1;
+      }
+
+      .container {
+        padding: 16px;
+      }
+
+      .table-container {
+        overflow-x: auto;
+      }
+
+      table {
+        min-width: 900px;
+      }
+
+      .login-card {
+        margin: 16px;
+        padding: 32px 24px;
+      }
+
+      .search-box {
+        min-width: 100%;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Login Page -->
+  <div class="login-container" id="login-page">
+    <div class="login-card">
+      <div class="login-logo">
+        <div class="logo-icon">M</div>
+        <h1>MyAdmissionGuide</h1>
+        <p>Sign in to access your dashboard</p>
+      </div>
+      <div class="login-error" id="login-error"></div>
+      <form id="login-form">
+        <div class="login-field">
+          <label for="username">Username</label>
+          <input type="text" id="username" placeholder="Enter username" required>
+        </div>
+        <div class="login-field">
+          <label for="password">Password</label>
+          <input type="password" id="password" placeholder="Enter password" required>
+        </div>
+        <button type="submit" class="login-btn">Sign In</button>
+      </form>
+    </div>
+  </div>
+
+  <!-- Dashboard -->
+  <div class="dashboard" id="dashboard">
+    <header class="header">
+      <div class="header-brand">
+        <div class="brand-icon">M</div>
+        <h1>MyAdmissionGuide</h1>
+      </div>
+      <div class="header-right">
+        <span class="user-info">Signed in as <strong id="logged-user">-</strong></span>
+        <button class="logout-btn" id="logout-btn">Sign Out</button>
+      </div>
+    </header>
+
+    <div class="stats-bar">
+      <div class="stat-card">
+        <div class="stat-icon total">
+          <span>&#9776;</span>
+        </div>
+        <div class="stat-content">
+          <div class="stat-value" id="total-leads">-</div>
+          <div class="stat-label">Total Leads</div>
+        </div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-icon today">
+          <span>&#9733;</span>
+        </div>
+        <div class="stat-content">
+          <div class="stat-value" id="today-leads">-</div>
+          <div class="stat-label">Today</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="container">
+      <div class="controls">
+        <input type="text" class="search-box" id="search" placeholder="Search by name, phone, exam, state...">
+        <button class="btn btn-primary" id="refresh-btn">Refresh</button>
+        <button class="btn btn-secondary" id="export-btn">Export CSV</button>
+      </div>
+
+      <div class="table-container">
+        <div id="loading" class="loading">
+          <div class="spinner"></div>
+          <p>Loading leads...</p>
+        </div>
+
+        <div id="empty" class="empty-state" style="display: none;">
+          <div class="empty-icon">&#128203;</div>
+          <h2>No leads yet</h2>
+          <p>Leads from the college predictor will appear here</p>
+        </div>
+
+        <table id="leads-table" style="display: none;">
+          <thead>
+            <tr>
+              <th>Date</th>
+              <th>Name</th>
+              <th>Phone</th>
+              <th>Email</th>
+              <th>State</th>
+              <th>Exam</th>
+              <th>Input</th>
+              <th>Predicted Rank</th>
+              <th>Category</th>
+              <th>Branch</th>
+            </tr>
+          </thead>
+          <tbody id="leads-tbody"></tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const API_URL = '/api';
+    let allLeads = [];
+    let authToken = localStorage.getItem('auth_token');
+
+    async function checkAuth() {
+      if (!authToken) {
+        showLogin();
+        return;
+      }
+
+      try {
+        const response = await fetch(`${API_URL}/auth/verify`, {
+          headers: { 'Authorization': `Bearer ${authToken}` }
+        });
+        const data = await response.json();
+
+        if (data.valid) {
+          showDashboard(data.username);
+        } else {
+          localStorage.removeItem('auth_token');
+          authToken = null;
+          showLogin();
+        }
+      } catch (error) {
+        showLogin();
+      }
+    }
+
+    function showLogin() {
+      document.getElementById('login-page').style.display = 'flex';
+      document.getElementById('dashboard').style.display = 'none';
+    }
+
+    function showDashboard(username) {
+      document.getElementById('login-page').style.display = 'none';
+      document.getElementById('dashboard').style.display = 'block';
+      document.getElementById('logged-user').textContent = username;
+      fetchLeads();
+    }
+
+    document.getElementById('login-form').addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const username = document.getElementById('username').value;
+      const password = document.getElementById('password').value;
+      const errorEl = document.getElementById('login-error');
+
+      try {
+        const response = await fetch(`${API_URL}/auth/login`, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ username, password })
+        });
+
+        const data = await response.json();
+
+        if (data.success) {
+          authToken = data.token;
+          localStorage.setItem('auth_token', authToken);
+          errorEl.style.display = 'none';
+          showDashboard(data.username);
+        } else {
+          errorEl.textContent = data.error || 'Login failed';
+          errorEl.style.display = 'block';
+        }
+      } catch (error) {
+        errorEl.textContent = 'Connection error. Please try again.';
+        errorEl.style.display = 'block';
+      }
+    });
+
+    document.getElementById('logout-btn').addEventListener('click', async () => {
+      try {
+        await fetch(`${API_URL}/auth/logout`, {
+          method: 'POST',
+          headers: { 'Authorization': `Bearer ${authToken}` }
+        });
+      } catch (e) {}
+
+      localStorage.removeItem('auth_token');
+      authToken = null;
+      showLogin();
+    });
+
+    async function fetchLeads() {
+      document.getElementById('loading').style.display = 'block';
+      document.getElementById('leads-table').style.display = 'none';
+      document.getElementById('empty').style.display = 'none';
+
+      try {
+        const response = await fetch(`${API_URL}/leads`, {
+          headers: { 'Authorization': `Bearer ${authToken}` }
+        });
+
+        if (response.status === 401) {
+          localStorage.removeItem('auth_token');
+          authToken = null;
+          showLogin();
+          return;
+        }
+
+        allLeads = await response.json();
+        renderLeads(allLeads);
+        updateStats(allLeads);
+      } catch (error) {
+        console.error('Failed to fetch leads:', error);
+        document.getElementById('loading').innerHTML = '<p style="color: #ef4444;">Failed to load leads. Please try again.</p>';
+      }
+    }
+
+    function renderLeads(leads) {
+      document.getElementById('loading').style.display = 'none';
+
+      if (leads.length === 0) {
+        document.getElementById('empty').style.display = 'block';
+        document.getElementById('leads-table').style.display = 'none';
+        return;
+      }
+
+      document.getElementById('empty').style.display = 'none';
+      document.getElementById('leads-table').style.display = 'table';
+
+      const tbody = document.getElementById('leads-tbody');
+      tbody.innerHTML = leads.map(lead => {
+        const date = new Date(lead.createdAt || lead.timestamp);
+        const dateStr = date.toLocaleDateString('en-IN', { day: '2-digit', month: 'short', year: 'numeric' });
+        const timeStr = date.toLocaleTimeString('en-IN', { hour: '2-digit', minute: '2-digit' });
+
+        const inputBadge = lead.inputType === 'marks'
+          ? `<span class="badge badge-marks">${lead.inputValue} marks</span>`
+          : `<span class="badge badge-rank">Rank ${lead.inputValue}</span>`;
+
+        const rankRange = lead.predictedRank
+          ? `#${lead.predictedRank.best.toLocaleString()} - #${lead.predictedRank.worst.toLocaleString()}`
+          : '-';
+
+        return `
+          <tr>
+            <td>${dateStr}<br><small style="color:#9ca3af">${timeStr}</small></td>
+            <td><strong>${lead.name || '-'}</strong></td>
+            <td>${lead.phone || '-'}</td>
+            <td>${lead.email || '-'}</td>
+            <td>${lead.state || '-'}</td>
+            <td>${lead.exam || '-'}</td>
+            <td>${inputBadge}</td>
+            <td class="rank-range">${rankRange}</td>
+            <td>${lead.category === '__all__' ? 'All' : lead.category || '-'}</td>
+            <td>${lead.branch === '__all__' ? 'All' : lead.branch || '-'}</td>
+          </tr>
+        `;
+      }).join('');
+    }
+
+    function updateStats(leads) {
+      document.getElementById('total-leads').textContent = leads.length;
+
+      const today = new Date().toDateString();
+      const todayLeads = leads.filter(lead => {
+        const leadDate = new Date(lead.createdAt || lead.timestamp).toDateString();
+        return leadDate === today;
+      });
+      document.getElementById('today-leads').textContent = todayLeads.length;
+    }
+
+    function filterLeads(query) {
+      if (!query) {
+        renderLeads(allLeads);
+        return;
+      }
+
+      const q = query.toLowerCase();
+      const filtered = allLeads.filter(lead =>
+        (lead.name && lead.name.toLowerCase().includes(q)) ||
+        (lead.phone && lead.phone.includes(q)) ||
+        (lead.email && lead.email.toLowerCase().includes(q)) ||
+        (lead.state && lead.state.toLowerCase().includes(q)) ||
+        (lead.exam && lead.exam.toLowerCase().includes(q))
+      );
+      renderLeads(filtered);
+    }
+
+    function exportCSV() {
+      if (allLeads.length === 0) {
+        alert('No leads to export');
+        return;
+      }
+
+      const headers = ['Date', 'Name', 'Phone', 'Email', 'State', 'Exam', 'Input Type', 'Input Value', 'Rank Best', 'Rank Worst', 'Category', 'Branch'];
+      const rows = allLeads.map(lead => [
+        new Date(lead.createdAt || lead.timestamp).toISOString(),
+        lead.name || '',
+        lead.phone || '',
+        lead.email || '',
+        lead.state || '',
+        lead.exam || '',
+        lead.inputType || '',
+        lead.inputValue || '',
+        lead.predictedRank?.best || '',
+        lead.predictedRank?.worst || '',
+        lead.category || '',
+        lead.branch || ''
+      ]);
+
+      const csv = [headers, ...rows].map(row => row.map(cell => `"${cell}"`).join(',')).join('\n');
+      const blob = new Blob([csv], { type: 'text/csv' });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = `myadmissionguide-leads-${new Date().toISOString().split('T')[0]}.csv`;
+      a.click();
+      URL.revokeObjectURL(url);
+    }
+
+    document.getElementById('search').addEventListener('input', (e) => filterLeads(e.target.value));
+    document.getElementById('refresh-btn').addEventListener('click', fetchLeads);
+    document.getElementById('export-btn').addEventListener('click', exportCSV);
+
+    checkAuth();
+  </script>
+</body>
+</html>
