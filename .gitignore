@@ -5,3 +5,4 @@ node_modules/
 .env
 .env.*
 the update data folder/
+.vercel
