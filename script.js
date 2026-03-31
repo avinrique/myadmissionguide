@@ -508,7 +508,10 @@ if (contactForm) {
         var email = document.getElementById('mag-popup-email').value.trim();
         var course = document.getElementById('mag-popup-course').value;
 
-        if (!name || !phone || !/^\d{10}$/.test(phone)) return;
+        if (!name) { document.getElementById('mag-popup-name').style.borderColor = '#ef4444'; return; }
+        document.getElementById('mag-popup-name').style.borderColor = '';
+        if (!phone || !/^\d{10}$/.test(phone)) { document.getElementById('mag-popup-phone').style.borderColor = '#ef4444'; return; }
+        document.getElementById('mag-popup-phone').style.borderColor = '';
 
         var submitBtn = document.getElementById('mag-popup-submit');
         submitBtn.disabled = true;
