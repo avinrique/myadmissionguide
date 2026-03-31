@@ -10,7 +10,7 @@
  *    - MONGODB_URI = mongodb+srv://username:password@cluster.xxxxx.mongodb.net/predictor?retryWrites=true&w=majority
  */
 
-import { MongoClient } from 'mongodb';
+import { MongoClient, ObjectId } from 'mongodb';
 
 const MONGODB_URI = process.env.MONGODB_URI;
 const DB_NAME = 'predictor1';
@@ -50,7 +50,7 @@ function isValidToken(token) {
 export default async function handler(req, res) {
   // CORS headers
   res.setHeader('Access-Control-Allow-Origin', '*');
-  res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS');
+  res.setHeader('Access-Control-Allow-Methods', 'GET, POST, DELETE, OPTIONS');
   res.setHeader('Access-Control-Allow-Headers', 'Content-Type, Authorization');
 
   if (req.method === 'OPTIONS') {
@@ -94,6 +94,27 @@ export default async function handler(req, res) {
 
       const leads = await collection.find({}).sort({ createdAt: -1 }).toArray();
       return res.status(200).json(leads);
+    }
+
+    // DELETE - Remove lead by ID (requires auth)
+    if (req.method === 'DELETE') {
+      const token = req.headers.authorization?.replace('Bearer ', '');
+
+      if (!isValidToken(token)) {
+        return res.status(401).json({ error: 'Unauthorized' });
+      }
+
+      const { id } = req.query;
+      if (!id) {
+        return res.status(400).json({ error: 'Lead ID is required' });
+      }
+
+      const result = await collection.deleteOne({ _id: new ObjectId(id) });
+      if (result.deletedCount === 0) {
+        return res.status(404).json({ error: 'Lead not found' });
+      }
+
+      return res.status(200).json({ success: true });
     }
 
     return res.status(405).json({ error: 'Method not allowed' });
