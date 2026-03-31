@@ -625,9 +625,11 @@
           <thead>
             <tr>
               <th>Date</th>
+              <th>Source</th>
               <th>Name</th>
               <th>Phone</th>
               <th>Email</th>
+              <th>Course</th>
               <th>State</th>
               <th>Exam</th>
               <th>Input</th>
@@ -781,12 +783,20 @@
           ? `#${lead.predictedRank.best.toLocaleString()} - #${lead.predictedRank.worst.toLocaleString()}`
           : '-';
 
+        const sourceBadge = lead.source === 'popup'
+          ? '<span class="badge" style="background:#fef3c7;color:#92400e">Popup</span>'
+          : lead.source === 'college-predictor'
+            ? '<span class="badge" style="background:#dbeafe;color:#1e40af">Predictor</span>'
+            : `<span class="badge">${lead.source || '-'}</span>`;
+
         return `
           <tr>
             <td>${dateStr}<br><small style="color:#9ca3af">${timeStr}</small></td>
+            <td>${sourceBadge}</td>
             <td><strong>${lead.name || '-'}</strong></td>
             <td>${lead.phone || '-'}</td>
             <td>${lead.email || '-'}</td>
+            <td>${lead.course || '-'}</td>
             <td>${lead.state || '-'}</td>
             <td>${lead.exam || '-'}</td>
             <td>${inputBadge}</td>
@@ -820,6 +830,8 @@
         (lead.name && lead.name.toLowerCase().includes(q)) ||
         (lead.phone && lead.phone.includes(q)) ||
         (lead.email && lead.email.toLowerCase().includes(q)) ||
+        (lead.course && lead.course.toLowerCase().includes(q)) ||
+        (lead.source && lead.source.toLowerCase().includes(q)) ||
         (lead.state && lead.state.toLowerCase().includes(q)) ||
         (lead.exam && lead.exam.toLowerCase().includes(q))
       );
@@ -832,12 +844,14 @@
         return;
       }
 
-      const headers = ['Date', 'Name', 'Phone', 'Email', 'State', 'Exam', 'Input Type', 'Input Value', 'Rank Best', 'Rank Worst', 'Category', 'Branch'];
+      const headers = ['Date', 'Source', 'Name', 'Phone', 'Email', 'Course', 'State', 'Exam', 'Input Type', 'Input Value', 'Rank Best', 'Rank Worst', 'Category', 'Branch'];
       const rows = allLeads.map(lead => [
         new Date(lead.createdAt || lead.timestamp).toISOString(),
+        lead.source || '',
         lead.name || '',
         lead.phone || '',
         lead.email || '',
+        lead.course || '',
         lead.state || '',
         lead.exam || '',
         lead.inputType || '',
