@@ -502,14 +502,50 @@ if (contactForm) {
     // Form submit handler
     popupForm.addEventListener('submit', function (e) {
         e.preventDefault();
-        localStorage.setItem('formFilled', 'true');
-        hidePopup();
 
-        // Show thank you message
-        thankYouOverlay.classList.add('mag-popup-visible');
-        setTimeout(function () {
-            thankYouOverlay.classList.remove('mag-popup-visible');
-        }, 3000);
+        var name = document.getElementById('mag-popup-name').value.trim();
+        var phone = document.getElementById('mag-popup-phone').value.trim();
+        var email = document.getElementById('mag-popup-email').value.trim();
+        var course = document.getElementById('mag-popup-course').value;
+
+        if (!name || !phone || !/^\d{10}$/.test(phone)) return;
+
+        var submitBtn = document.getElementById('mag-popup-submit');
+        submitBtn.disabled = true;
+        submitBtn.textContent = 'Submitting...';
+
+        fetch('https://myadmissionguide.vercel.app/api/leads', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+                name: name,
+                phone: phone,
+                email: email,
+                course: course,
+                source: 'popup'
+            })
+        })
+        .then(function () {
+            localStorage.setItem('formFilled', 'true');
+            hidePopup();
+            thankYouOverlay.classList.add('mag-popup-visible');
+            setTimeout(function () {
+                thankYouOverlay.classList.remove('mag-popup-visible');
+            }, 3000);
+        })
+        .catch(function () {
+            // Save locally as fallback and proceed
+            localStorage.setItem('formFilled', 'true');
+            hidePopup();
+            thankYouOverlay.classList.add('mag-popup-visible');
+            setTimeout(function () {
+                thankYouOverlay.classList.remove('mag-popup-visible');
+            }, 3000);
+        })
+        .finally(function () {
+            submitBtn.disabled = false;
+            submitBtn.textContent = 'Submit';
+        });
     });
 
     // Start the first timer (10 seconds)
