@@ -770,11 +770,14 @@
         const dateStr = date.toLocaleDateString('en-IN', { day: '2-digit', month: 'short', year: 'numeric' });
         const timeStr = date.toLocaleTimeString('en-IN', { hour: '2-digit', minute: '2-digit' });
 
-        const inputBadge = lead.inputType === 'marks'
-          ? `<span class="badge badge-marks">${lead.inputValue} marks</span>`
-          : `<span class="badge badge-rank">Rank ${lead.inputValue}</span>`;
+        let inputBadge = '-';
+        if (lead.inputValue) {
+          inputBadge = lead.inputMode === 'marks'
+            ? `<span class="badge badge-marks">${lead.inputValue} marks</span>`
+            : `<span class="badge badge-rank">Rank ${lead.inputValue}</span>`;
+        }
 
-        const rankRange = lead.predictedRank
+        const rankRange = lead.predictedRank && lead.predictedRank.best != null
           ? `#${lead.predictedRank.best.toLocaleString()} - #${lead.predictedRank.worst.toLocaleString()}`
           : '-';
 
