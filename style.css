@@ -2009,6 +2009,26 @@ ul { list-style: none; }
 }
 
 /* ===== SITE DISCLAIMER ===== */
+/* ===== THIRD-PARTY DISCLOSURE BANNER ===== */
+.third-party-banner {
+    background: #eff6ff;
+    border-bottom: 2px solid #3b82f6;
+    padding: 12px 0;
+    text-align: center;
+}
+
+.third-party-banner p {
+    font-size: 13px;
+    color: #1e40af;
+    margin: 0;
+    line-height: 1.5;
+    font-weight: 500;
+}
+
+.third-party-banner strong {
+    color: #1e3a8a;
+}
+
 .site-disclaimer {
     background: #fffbeb;
     padding: 16px 0;
