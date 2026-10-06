@@ -37,7 +37,6 @@ A static HTML website providing:
 
 ## Contact
 
-- **Phone:** +91-8100-636-959
 - **Email:** myadmissionguide.in@gmail.com
 - **Head Office:** 3rd Floor, Tiwari Plaza, Dhanbad, Bank More, Jharkhand, Pin 826004
 - **Counselling Office:** Kodigehalli, Bengaluru, Karnataka 560092
